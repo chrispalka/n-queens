@@ -41,22 +41,22 @@
           'color: black;',
           'color: grey;'
         );
-      } else if (params.hasOwnProperty("n")) {
-        this.set(makeEmptyMatrix(this.get("n")));
+      } else if (params.hasOwnProperty('n')) {
+        this.set(makeEmptyMatrix(this.get('n')));
       } else {
-        this.set("n", params.length);
+        this.set('n', params.length);
       }
     },
 
     rows: function () {
-      return _(_.range(this.get("n"))).map(function (rowIndex) {
+      return _(_.range(this.get('n'))).map(function (rowIndex) {
         return this.get(rowIndex);
       }, this);
     },
 
     togglePiece: function (rowIndex, colIndex) {
       this.get(rowIndex)[colIndex] = +!this.get(rowIndex)[colIndex];
-      this.trigger("change");
+      this.trigger('change');
     },
 
     _getFirstRowColumnIndexForMajorDiagonalOn: function (rowIndex, colIndex) {
@@ -95,9 +95,9 @@
     _isInBounds: function (rowIndex, colIndex) {
       return (
         0 <= rowIndex &&
-        rowIndex < this.get("n") &&
+        rowIndex < this.get('n') &&
         0 <= colIndex &&
-        colIndex < this.get("n")
+        colIndex < this.get('n')
       );
     },
 
