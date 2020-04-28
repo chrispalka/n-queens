@@ -7,39 +7,39 @@
     initialize: function (params) {
       if (_.isUndefined(params) || _.isNull(params)) {
         console.log(
-          "Good guess! But to use the Board() constructor, you must pass it an argument in one of the following formats:"
+          'Good guess! But to use the Board() constructor, you must pass it an argument in one of the following formats:'
         );
         console.log(
-          "\t1. An object. To create an empty board of size n:\n\t\t{n: %c<num>%c} - Where %c<num> %cis the dimension of the (empty) board you wish to instantiate\n\t\t%cEXAMPLE: var board = new Board({n:5})",
-          "color: blue;",
-          "color: black;",
-          "color: blue;",
-          "color: black;",
-          "color: grey;"
+          '\t1. An object. To create an empty board of size n:\n\t\t{n: %c<num>%c} - Where %c<num> %cis the dimension of the (empty) board you wish to instantiate\n\t\t%cEXAMPLE: var board = new Board({n:5})',
+          'color: blue;',
+          'color: black;',
+          'color: blue;',
+          'color: black;',
+          'color: grey;'
         );
         console.log(
-          "\t2. An array of arrays (a matrix). To create a populated board of size n:\n\t\t[ [%c<val>%c,%c<val>%c,%c<val>%c...], [%c<val>%c,%c<val>%c,%c<val>%c...], [%c<val>%c,%c<val>%c,%c<val>%c...] ] - Where each %c<val>%c is whatever value you want at that location on the board\n\t\t%cEXAMPLE: var board = new Board([[1,0,0],[0,1,0],[0,0,1]])",
-          "color: blue;",
-          "color: black;",
-          "color: blue;",
-          "color: black;",
-          "color: blue;",
-          "color: black;",
-          "color: blue;",
-          "color: black;",
-          "color: blue;",
-          "color: black;",
-          "color: blue;",
-          "color: black;",
-          "color: blue;",
-          "color: black;",
-          "color: blue;",
-          "color: black;",
-          "color: blue;",
-          "color: black;",
-          "color: blue;",
-          "color: black;",
-          "color: grey;"
+          '\t2. An array of arrays (a matrix). To create a populated board of size n:\n\t\t[ [%c<val>%c,%c<val>%c,%c<val>%c...], [%c<val>%c,%c<val>%c,%c<val>%c...], [%c<val>%c,%c<val>%c,%c<val>%c...] ] - Where each %c<val>%c is whatever value you want at that location on the board\n\t\t%cEXAMPLE: var board = new Board([[1,0,0],[0,1,0],[0,0,1]])',
+          'color: blue;',
+          'color: black;',
+          'color: blue;',
+          'color: black;',
+          'color: blue;',
+          'color: black;',
+          'color: blue;',
+          'color: black;',
+          'color: blue;',
+          'color: black;',
+          'color: blue;',
+          'color: black;',
+          'color: blue;',
+          'color: black;',
+          'color: blue;',
+          'color: black;',
+          'color: blue;',
+          'color: black;',
+          'color: blue;',
+          'color: black;',
+          'color: grey;'
         );
       } else if (params.hasOwnProperty("n")) {
         this.set(makeEmptyMatrix(this.get("n")));
@@ -125,9 +125,9 @@
       [0, 0, 0, 0]
       */
       // var rowIndex = this.rows.length || rowIndex;
-                      // 6          4
+      // 6          4
       var rowIndex = rowIndex > this.rows.length ? this.rows.length : rowIndex;
-    // var result = 6 > 4 ?'pass':'fail';
+      // var result = 6 > 4 ?'pass':'fail';
       // if (rowIndex > this.rows.length) {
       //   console.log("oops");
       //   return;
