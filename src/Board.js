@@ -118,22 +118,14 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function (rowIndex) {
-      /*
-      [0, 0, 0, 0],
-      [1, 0, 1, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0]
-      */
-      // var rowIndex = this.rows.length || rowIndex;
-      // 6          4
-      var rowIndex = rowIndex > this.rows.length ? this.rows.length : rowIndex;
-      // var result = 6 > 4 ?'pass':'fail';
-      // if (rowIndex > this.rows.length) {
-      //   console.log("oops");
-      //   return;
-      // }
+      if (rowIndex > this.rows().length - 1) {
+        console.log('Row not found on board!');
+        return;
+      }
+      console.log('row index: ' + rowIndex);
+      console.log('rows on board: ' + this.rows().length);
       var count = 0;
-      this.rows()[rowIndex].forEach(function (r) {
+      this.rows()[rowIndex].forEach(function(r) {
         if (r === 1) {
           count++;
         }
@@ -143,7 +135,12 @@
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function () {
-      return false; // fixme
+      for (var row = 0; row < this.rows().length; row++) {
+        if (this.hasRowConflictAt(row)) {
+          return true;
+        }
+      }
+      return false;
     },
 
     // COLUMNS - run from top to bottom
@@ -151,12 +148,27 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function (colIndex) {
-      return false; // fixme
+      if (colIndex > this.rows()[0].length - 1) {
+        console.log('Column not found on board!');
+        return;
+      }
+      var count = 0;
+      this.rows().forEach(function (r) {
+        if (r[colIndex] === 1) {
+          count++;
+        }
+      });
+      return count > 1;
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function () {
-      return false; // fixme
+      for (var col = 0; col < this.rows().length; col++) {
+        if (this.hasColConflictAt(col)) {
+          return true;
+        }
+      }
+      return false;
     },
 
     // Major Diagonals - go from top-left to bottom-right
