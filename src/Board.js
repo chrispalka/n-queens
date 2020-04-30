@@ -125,7 +125,7 @@
       console.log('row index: ' + rowIndex);
       console.log('rows on board: ' + this.rows().length);
       var count = 0;
-      this.rows()[rowIndex].forEach(function(r) {
+      this.rows()[rowIndex].forEach(function (r) {
         if (r === 1) {
           count++;
         }
@@ -176,7 +176,21 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function (majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      var count = 0;
+      /*
+        [0, 0, 0, 0]
+        [0, 0, 0, 0]
+        [1, 0, 0, 0]
+        [0, 1, 0, 0]
+      */
+      for (let index = 0; index < this.rows().length; index++) {
+        if (!(majorDiagonalColumnIndexAtFirstRow + index >= this.rows()[index].length)) {
+          if (this.rows()[index][majorDiagonalColumnIndexAtFirstRow + index] === 1) {
+            count++;
+          }
+        }
+      }
+      return count > 1;
     },
 
     // test if any major diagonals on this board contain conflicts
