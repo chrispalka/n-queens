@@ -65,28 +65,35 @@ window.findNQueensSolution = function (n) {
   if (n === 0 || n === 2 || n === 3) {
     return solution.rows();
   }
-  let recursiveChecker = function (index) {
+
+  let toggler = function (row, index) {
     solution = new Board({ n: n });
     let pieces = 0;
-    if (index === n) {
-      return;
-    }
+    solution.togglePiece(row, index);
+    pieces++;
+
     for (let i = 0; i < n; i++) {
-      for (let j = i === 0 ? index : 0; j < n; j++) {
+      for (let j = 0; j < n; j++) {
+        if(row === i && j === index){
+          continue;
+        }
         solution.togglePiece(i, j);
         pieces++;
         if (solution.hasAnyQueensConflicts()) {
           solution.togglePiece(i, j);
+
           pieces--;
         }
       }
     }
-    console.log(solution.rows());
     return pieces;
   };
-  for (let i = 0; i < n; i++) {
-    if (recursiveChecker(i) === n) {
-      break;
+
+  for (let i2 = 0; i2 < n; i2++) {
+    for (let j2 = 0; j2 < n; j2++) {
+      if (toggler(i2, j2) === n) {
+        return solution.rows();
+      }
     }
   }
 
@@ -94,7 +101,6 @@ window.findNQueensSolution = function (n) {
     "Single solution for " + n + " queens:",
     JSON.stringify(solution)
   );
-  return solution.rows();
 };
 
 // return the number of nxn chessboards that exist, with n queens placed such that none of them can attack each other
