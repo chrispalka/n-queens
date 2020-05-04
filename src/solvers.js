@@ -10,10 +10,7 @@
 // (There are also optimizations that will allow you to skip a lot of the dead search space)
 // take a look at solversSpec.js to see what the tests are expecting
 
-
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n rooks placed such that none of them can attack each other
-
-
 
 window.findNRooksSolution = function (n) {
   var solution = []; //new Board({ 'n': n });
@@ -33,24 +30,22 @@ window.findNRooksSolution = function (n) {
   return solution;
 };
 
-
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function (n) {
-  let board = new Board({n});
+  let board = new Board({ n });
   var solutionCount = 0;
-
 
   let recursiveChecker = function (funcBoard, row = 0) {
     if (row >= funcBoard.rows().length) {
       solutionCount++;
-      console.log('Solution found!', solutionCount);
+      // console.log('Solution found!', solutionCount);
       return;
     }
     for (var j = 0; j < funcBoard.rows().length; j++) {
-      console.log(`toggling piece on row: ${row} column: ${j}`);
+      // console.log(`toggling piece on row: ${row} column: ${j}`);
       funcBoard.togglePiece(row, j);
       if (!funcBoard.hasAnyRooksConflicts()) {
-        console.log('Conflict exists, toggling piece back to 0');
+        // console.log('Conflict exists, toggling piece back to 0');
         recursiveChecker(funcBoard, row + 1);
       }
       funcBoard.togglePiece(row, j);
@@ -59,65 +54,74 @@ window.countNRooksSolutions = function (n) {
 
   recursiveChecker(board);
 
-  console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
+  console.log("Number of solutions for " + n + " rooks:", solutionCount);
   return solutionCount;
 };
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
 window.findNQueensSolution = function (n) {
-  let solution = [];
-  let board = new Board({n});
-  let recursiveChecker = function (funcBoard, row = 0, callback) {
-    if (row >= funcBoard.rows().length) {
-      callback();
+  let solution = new Board({ n: n });
+
+  if (n === 0 || n === 2 || n === 3) {
+    return solution.rows();
+  }
+  let recursiveChecker = function (index) {
+    solution = new Board({ n: n });
+    let pieces = 0;
+    if (index === n) {
       return;
     }
-    for (var j = 0; j < funcBoard.rows().length; j++) {
-      console.log(`toggling piece on row: ${row} column: ${j}`);
-      funcBoard.togglePiece(row, j);
-      if (!funcBoard.hasAnyQueensConflicts()) {
-        console.log('Conflict exists, toggling piece back to 0');
-        recursiveChecker(funcBoard, row + 1, callback);
+    for (let i = 0; i < n; i++) {
+      for (let j = i === 0 ? index : 0; j < n; j++) {
+        solution.togglePiece(i, j);
+        pieces++;
+        if (solution.hasAnyQueensConflicts()) {
+          solution.togglePiece(i, j);
+          pieces--;
+        }
       }
-      funcBoard.togglePiece(row, j);
     }
+    console.log(solution.rows());
+    return pieces;
   };
+  for (let i = 0; i < n; i++) {
+    if (recursiveChecker(i) === n) {
+      break;
+    }
+  }
 
-  let result = recursiveChecker(board, 0, function() {
-    return board.rows();
-  });
-
-  solution.concat(result);
-
-  console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
-  return solution;
+  console.log(
+    "Single solution for " + n + " queens:",
+    JSON.stringify(solution)
+  );
+  return solution.rows();
 };
 
 // return the number of nxn chessboards that exist, with n queens placed such that none of them can attack each other
 window.countNQueensSolutions = function (n) {
   var solutionCount = 0;
-  let board = new Board({n});
+  let board = new Board({ n });
 
   let recursiveChecker = function (funcBoard, row = 0) {
     if (row >= funcBoard.rows().length) {
       solutionCount++;
-      console.log('Solution found!', solutionCount);
+      // console.log('Solution found!', solutionCount);
       return;
     }
     for (var j = 0; j < funcBoard.rows().length; j++) {
-      console.log(`toggling piece on row: ${row} column: ${j}`);
+      // console.log(`toggling piece on row: ${row} column: ${j}`);
       funcBoard.togglePiece(row, j);
       if (!funcBoard.hasAnyQueensConflicts()) {
-        console.log(funcBoard.rows());
+        // console.log(funcBoard.rows());
         recursiveChecker(funcBoard, row + 1);
       }
-      console.log('Conflict exists, toggling piece back to 0');
+      // console.log('Conflict exists, toggling piece back to 0');
       funcBoard.togglePiece(row, j);
     }
   };
 
   recursiveChecker(board);
 
-  console.log('Number of solutions for ' + n + ' queens:', solutionCount);
+  console.log("Number of solutions for " + n + " queens:", solutionCount);
   return solutionCount;
 };
